@@ -58,8 +58,15 @@ public class signup extends Fragment implements View.OnClickListener{
             {
                 registerUser(firstNameText, lastNameText, passwordText);
             }
+
+            FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            login lll= new login();
+            fragmentTransaction.replace(R.id.fragmentContainer, lll);
+            fragmentTransaction.commit();
         }
-        if (v.getId() == R.id.textView8) {
+        else if (v.getId() == R.id.textView8) {
 
             FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -67,6 +74,7 @@ public class signup extends Fragment implements View.OnClickListener{
             fragmentTransaction.replace(R.id.fragmentContainer, lll);
             fragmentTransaction.commit();
         }
+
     }
 
     private void registerUser(String firstNameText, String lastNameText, String passwordText) {
