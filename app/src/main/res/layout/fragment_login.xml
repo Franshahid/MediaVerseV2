@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:text="Reset your password"
+        android:text="Reset password"
         android:textColor="#8A8A8A"
         app:layout_constraintBottom_toTopOf="@+id/Loginlogin"
         app:layout_constraintEnd_toEndOf="parent"
