@@ -46,14 +46,15 @@
             app:srcCompat="@drawable/greenish_circular_curve" />
 
         <Button
-            android:id="@+id/button"
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="240dp"
-            android:layout_marginTop="672dp"
+            android:id="@+id/button2"
+            android:layout_width="99dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="264dp"
+            android:layout_marginTop="760dp"
             android:background="@drawable/button_custom2"
-            android:text="Guest Mode"
-            android:textSize="11sp"
+            android:text="Guest mode"
+            android:textSize="10sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class logInActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,17 @@ public class logInActivity extends AppCompatActivity {
 
 
         myImageView2.startAnimation(rotateAnimation2);
+
+        Button button2 = findViewById(R.id.button2);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to open the target activity
+                Intent intent = new Intent(logInActivity.this, homeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }
