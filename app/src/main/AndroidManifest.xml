@@ -17,6 +17,9 @@
             android:name=".logInActivity"
             android:exported="false" />
         <activity
+            android:name=".playActivity"
+            android:exported="false" />
+        <activity
             android:name=".homeActivity"
             android:exported="false" />
         <activity

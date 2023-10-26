@@ -45,8 +45,10 @@
                         android:layout_marginLeft="25dp"
                         android:layout_weight="1"
                         android:layout_marginTop="5dp"
+
                         android:background="@drawable/desktop_wallpaper_aashiqui_2_2_ashque_2_thumbnail"
-                        tools:ignore="DuplicateIds" />
+                        tools:ignore="DuplicateIds"
+                        />
 
                     <TextView
                         android:id="@+id/textView21"
