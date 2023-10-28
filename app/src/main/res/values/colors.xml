@@ -5,4 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="Greenish">#FF2A8253</color>
     <color name="Ash">#FF494A49</color>
+    <color name="Ash2">#FF6e6e6e</color>
+    <color name="black_trans">#66000000</color>
+    <color name="white_trans">#66FFFFFF</color>
 </resources>

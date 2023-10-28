@@ -1,7 +1,11 @@
 package com.example.myapplication;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +35,7 @@ public class Search extends Fragment implements View.OnClickListener  {
     HttpTransport HTTP_TRANSPORT = new com.google.api.client.http.javanet.NetHttpTransport();
     JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
-    private EditText searchBar;
+    private SearchView searchBar;
     private Button searchButton;
     private RecyclerView videoList;
     private YouTube youtube;
@@ -39,14 +43,16 @@ public class Search extends Fragment implements View.OnClickListener  {
     private SearchListAdapter searchResultsAdapter;
     private final String API_KEY = "AIzaSyANCeqsxRm4V1UVDHOl1jQ8VXgJnnsthe4";
 
+    NotificationManager notificationManager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         View view= inflater.inflate(R.layout.fragment_search, container, false);
 
         searchBar = view.findViewById(R.id.searchBar);
-        searchButton = view.findViewById(R.id.searchButton);
         videoList = view.findViewById(R.id.videoList);
         videoList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -56,26 +62,53 @@ public class Search extends Fragment implements View.OnClickListener  {
         videoList = view.findViewById(R.id.videoList);
         videoList.setLayoutManager(new LinearLayoutManager(getActivity()));
         videoList.setAdapter(searchResultsAdapter);
+        createChannel();
 
-        searchButton.setOnClickListener(new View.OnClickListener() {
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View v) {
-                Log.d("SearchButton", "Search button clicked!!!!");
-                searchResults.clear();
-                String query = searchBar.getText().toString();
+            public boolean onQueryTextSubmit(String query) {
+
                 if (!query.isEmpty()) {
                     searchYoutubeVideos(query);
                     Integer val = searchResults.size();
-                    Log.d("prob", val.toString());
                 }
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Handle changes to the search query text as the user types (optional).
+                return true;
             }
         });
 
         return view;
+}
+
+    private void createChannel() {
+        Log.d("debug", "creatingChannel");
+        NotificationChannel channel = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            channel = new NotificationChannel(CreateNotification.CHANNELID, "Farhan", NotificationManager.IMPORTANCE_DEFAULT);
+        }
+
+        notificationManager = (NotificationManager) getContext().getSystemService(NotificationManager.class);
+        if (notificationManager != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationManager.createNotificationChannel(channel);
+            }
+        }
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        notificationManager.cancelAll();
+    }
 
-//
+    //
     private void searchYoutubeVideos(final String query) {
         new Thread(new Runnable() {
             @Override
@@ -102,7 +135,7 @@ public class Search extends Fragment implements View.OnClickListener  {
                         }
                     });
                 } catch (IOException e) {
-                    e.printStackTrace(); // Handle the exception gracefully
+                    e.printStackTrace();
                 }
             }
         }).start();
@@ -112,4 +145,5 @@ public class Search extends Fragment implements View.OnClickListener  {
     public void onClick(View view) {
 
     }
+
 }

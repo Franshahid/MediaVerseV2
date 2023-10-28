@@ -6,28 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".Search">
 
-
-    <Button
-        android:id="@+id/searchButton"
-        android:layout_width="192dp"
-        android:layout_height="195dp"
-        android:layout_marginEnd="16dp"
-        android:text="Search"
-        app:layout_constraintEnd_toEndOf="parent" />
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:queryHint="Search"
+        android:background="@drawable/search_custom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.081" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/videoList"
-        android:layout_width="409dp"
-        android:layout_height="534dp"
+        android:layout_width="399dp"
+        android:layout_height="667dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="1dp" />
-
-    <EditText
-        android:id="@+id/searchBar"
-        android:layout_width="201dp"
-        android:layout_height="96dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
