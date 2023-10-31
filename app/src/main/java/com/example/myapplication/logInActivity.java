@@ -1,8 +1,5 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,8 +12,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class logInActivity extends AppCompatActivity {
 
@@ -69,7 +64,7 @@ public class logInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Create an Intent to open the target activity
-                Intent intent = new Intent(logInActivity.this, homeActivity.class);
+                Intent intent = new Intent(logInActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
