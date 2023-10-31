@@ -12,17 +12,25 @@ import android.content.IntentFilter;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.IntRange;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
 import com.google.api.services.youtube.model.Thumbnail;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.DefaultPlayerUiController;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.views.YouTubePlayerSeekBar;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.customui.views.YouTubePlayerSeekBarListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.options.IFramePlayerOptions;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerTracker;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.utils.YouTubePlayerUtils;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import org.checkerframework.checker.units.qual.A;
@@ -30,6 +38,7 @@ import org.checkerframework.checker.units.qual.A;
 public class youtubePlayer extends AppCompatActivity implements Playable{
     private YouTubePlayerView youTubePlayerView;
     private YouTubePlayer youTubePlayer;
+    private YouTubePlayerListener listener;
     private String videoId, Title, Artist;
     private PlayerConstants.PlayerState currentState;
     private YouTubePlayerTracker youTubePlayerTracker;
@@ -43,6 +52,7 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
         setContentView(R.layout.youtubeplayer);
         super.onCreate(savedInstanceState);
         youTubePlayerTracker = new YouTubePlayerTracker();
+
         // Retrieve the videoId from the intent's extras
         videoId = getIntent().getStringExtra("videoId");
         Title = getIntent().getStringExtra("Title");
@@ -61,9 +71,11 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
                 }
             }
         };
+
         registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
         startService(new Intent(getBaseContext(), OnClearFromRecentService.class));
         playVideo(videoId);
+
     }
 
 
@@ -98,21 +110,58 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
     }
     private void playVideo(String videoId) {
 
-        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+        youTubePlayerView.addYouTubePlayerListener(listener= new AbstractYouTubePlayerListener() {
 
             @Override
             public void onReady(@NonNull YouTubePlayer Player) {
+                DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, Player);
+                youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
                 youTubePlayer = Player;
                 Player.loadVideo(videoId, 0);
                 youTubePlayer.addListener(youTubePlayerTracker);
                 isPlaying = true;
             }
+
             @Override
             public void onStateChange(@androidx.annotation.NonNull YouTubePlayer youTubePlayer, @androidx.annotation.NonNull PlayerConstants.PlayerState playerState){
-                Log.d("debug", "STATECHANGEDDDDDDDDDDDDDDDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 if(youTubePlayerTracker.getState().equals(PlayerConstants.PlayerState.PLAYING))onTrackPause();
                 else onTrackPlay();
             }
         });
+
+//        IFramePlayerOptions options = new IFramePlayerOptions.Builder().controls(0).build();
+//        youTubePlayerView.initialize(listener, options);
+
+
+
+
+//        listener = new AbstractYouTubePlayerListener() {
+//            @Override
+//            public void onReady(@NonNull YouTubePlayer Player) {
+//                youTubePlayer = Player;
+//                Player.loadVideo(videoId,0);
+//
+////                DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, Player);
+////                youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
+//
+//                youTubePlayer.addListener(youTubePlayerTracker);
+//                isPlaying = true;
+//
+//            }
+//
+//            @Override
+//            public void onStateChange(@androidx.annotation.NonNull YouTubePlayer youTubePlayer, @androidx.annotation.NonNull PlayerConstants.PlayerState playerState){
+//                Log.d("debug", "STATECHANGEDDDDDDDDDDDDDDDDD!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//                if(youTubePlayerTracker.getState().equals(PlayerConstants.PlayerState.PLAYING))onTrackPause();
+//                else onTrackPlay();
+//            }
+//        };
+//
+////        IFramePlayerOptions options = new IFramePlayerOptions.Builder().controls(0).build();
+////        youTubePlayerView.initialize(listener, options);
+
+
     }
+
+
 }

@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.myapplication"
-        minSdk = 24
+        minSdk = 33
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -64,6 +64,7 @@ android {
 
 dependencies {
     implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+    implementation ("com.pierfrancescosoffritti.androidyoutubeplayer:custom-ui:12.0.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation ("com.google.api-client:google-api-client:1.33.0")
