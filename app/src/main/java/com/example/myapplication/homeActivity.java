@@ -143,7 +143,8 @@ public class homeActivity extends AppCompatActivity implements NavigationView.On
         int itemId = item.getItemId();
         //for selecting particular item on navigation drawer each fragment will be displayed
         if (itemId == R.id.nav_profile) {
-            openFragment(new ProfileFragment());
+            Intent intent = new Intent(homeActivity.this, profileActivity.class);
+            startActivity(intent);
         } else if (itemId == R.id.nav_settings) {
             openFragment(new SettingsFragment());
         } else if (itemId == R.id.nav_about) {

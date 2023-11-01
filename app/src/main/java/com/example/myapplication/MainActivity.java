@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 //        requestPermission();
 
         TextView textView = findViewById(R.id.textView2);
+        ImageView imageView = findViewById(R.id.imageView);
+
 
         Animation increaseAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha_increase);
         Animation decreaseAnimation = AnimationUtils.loadAnimation(this, R.anim.alpha_decrease);
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 // Start the decrease animation when the increase animation ends
                 textView.startAnimation(decreaseAnimation);
+                imageView.startAnimation(decreaseAnimation);
             }
             @Override
             public void onAnimationRepeat(Animation animation) {
@@ -60,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 // Set the text view's alpha to 0 when the decrease animation ends
                 textView.setAlpha(0);
+                imageView.setAlpha(0);
                 logIN();
             }
 
@@ -70,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
 // Start the increase animation
         textView.startAnimation(increaseAnimation);
-
-
-
-
+        imageView.startAnimation(increaseAnimation);
     }
 
     protected void logIN() {

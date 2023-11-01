@@ -22,9 +22,12 @@
         <activity
             android:name=".playActivity"
             android:exported="false" />
+        <activity
+            android:name=".profileActivity"
+            android:exported="false" />
         <activity android:name=".MusicPlayerActivity"></activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".homeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".youtubePlayer" />

@@ -2,13 +2,16 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="semiblack">#FF1C1C1C</color>
-    <color name="semiblack_trans">#EE1C1C1C</color>
+    <color name="semiblack_trans">#CC1C1C1C</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="Greenish">#FF2A8253</color>
-    <color name="Greenish_trans">#BB2A8253</color>
+    <color name="Greenish">#FF2AC989</color>
+    <color name="Greenish_trans">#FF2AC989</color>
     <color name="Ash">#FF494A49</color>
+    <color name="Ash_trans">#66494A49</color>
     <color name="Ash2">#FF6e6e6e</color>
     <color name="black_trans">#66000000</color>
+    <color name="black_trans2">#33000000</color>
     <color name="white_trans">#66FFFFFF</color>
+    <color name="trans">#00FFFFFF</color>
 </resources>
 

@@ -64,7 +64,7 @@ public class logInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Create an Intent to open the target activity
-                Intent intent = new Intent(logInActivity.this, HomeActivity.class);
+                Intent intent = new Intent(logInActivity.this, homeActivity.class);
                 startActivity(intent);
             }
         });

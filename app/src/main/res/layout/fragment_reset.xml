@@ -90,7 +90,7 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:text="SIGN UP"
-        android:textColor="#2A8253"
+        android:textColor="@color/Greenish"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

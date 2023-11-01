@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="250dp"
     android:orientation="vertical"
-    android:background="@drawable/nav_header"
+    android:background="@drawable/g1"
     android:gravity="top"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -29,10 +29,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:text="Menu"
+                android:textColor="@color/Greenish"
                 android:textSize="30sp"
-                android:textColor="#62FFAB"
-                android:layout_gravity="center_vertical"/>
+                android:textStyle="bold" />
 
 
         </LinearLayout>

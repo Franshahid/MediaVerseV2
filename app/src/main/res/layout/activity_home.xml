@@ -56,13 +56,17 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/semiblack_trans"
+            android:layout_width="374dp"
+            android:layout_height="70dp"
+            android:background="@color/trans"
+            android:layout_marginTop="0dp"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:itemIconTint="@color/tool_bar_col"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title=" "
             tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
