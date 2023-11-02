@@ -70,10 +70,12 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
             @Override
             public void onReceive(Context context, Intent intent) {
                 Log.d("debug", "Receivingggg!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                if (isPlaying){
-                    youTubePlayer.pause();
-                } else {
-                    youTubePlayer.play();
+                if(onPlayNow) {
+                    if (isPlaying) {
+                        youTubePlayer.pause();
+                    } else {
+                        youTubePlayer.play();
+                    }
                 }
             }
         };
