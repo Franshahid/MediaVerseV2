@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +11,6 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -24,9 +24,10 @@ public class MusicPlayerActivity extends AppCompatActivity {
     ImageView pausePlay,nextBtn,previousBtn,musicIcon;
     ArrayList<AudioModel> songsList;
     AudioModel currentSong;
-
-    MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
+    static boolean onPlayNow = false;
+    static MediaPlayer mediaPlayer = MyMediaPlayer.getInstance();
     BroadcastReceiver broadcastReceiver;
+    public static NotificationManager notificationManager;
     int x=0;
     boolean isPlaying;
     @Override
@@ -45,7 +46,7 @@ public class MusicPlayerActivity extends AppCompatActivity {
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                pausePlay();
+                if(onPlayNow)pausePlay();
             }
         };
         registerReceiver(broadcastReceiver, new IntentFilter("TRACKS_TRACKS"));
@@ -112,12 +113,12 @@ public class MusicPlayerActivity extends AppCompatActivity {
         playMusic();
     }
 
-
-
     private void playMusic(){
 
         mediaPlayer.reset();
         try {
+            onPlayNow = true;
+            if(youtubePlayer.Started)youtubePlayer.Pause();
             mediaPlayer.setDataSource(currentSong.getPath());
             mediaPlayer.prepare();
             mediaPlayer.start();
@@ -133,7 +134,6 @@ public class MusicPlayerActivity extends AppCompatActivity {
         MyMediaPlayer.currentIndex%=songsList.size();
         mediaPlayer.reset();
         setResourcesWithMusic();
-
     }
 
     private void playPreviousSong(){
@@ -143,6 +143,11 @@ public class MusicPlayerActivity extends AppCompatActivity {
         setResourcesWithMusic();
     }
 
+    public static void Pause(){
+        onPlayNow = false;
+        mediaPlayer.pause();
+        //notificationManager.cancelAll();
+    }
     private void pausePlay(){
         if(mediaPlayer.isPlaying()) {
             mediaPlayer.pause();

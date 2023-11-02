@@ -15,7 +15,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class CreateNotificationOffline {
-    public static final String CHANNELID = "channel2";
+    public static final String CHANNELID = "channel1";
 
     public static final String PLAY = "play";
     public static final String PAUSE = "pause";

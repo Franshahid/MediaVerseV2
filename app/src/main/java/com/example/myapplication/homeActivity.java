@@ -10,6 +10,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -34,6 +37,9 @@ import android.graphics.Color;
 public class homeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     FragmentManager fragmentManager;
+
+    public static ImageView note;
+    public static ImageView half;
     private Toolbar toolbar;
 
     BottomNavigationView bottomNavigationView;
@@ -47,6 +53,22 @@ public class homeActivity extends AppCompatActivity implements NavigationView.On
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(flags);
         setContentView(R.layout.activity_home);
+
+        half = findViewById(R.id.half);
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+
+        rotateAnimation.setDuration(5000);
+
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        rotateAnimation.setInterpolator(new LinearInterpolator());
+
+        half.startAnimation(rotateAnimation);
+
+        note = findViewById(R.id.music_note);
+        note.setAlpha(0);
+        half.setAlpha(0);
 
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

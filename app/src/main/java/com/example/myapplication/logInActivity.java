@@ -58,9 +58,9 @@ public class logInActivity extends AppCompatActivity {
 
         myImageView2.startAnimation(rotateAnimation2);
 
-        Button button2 = findViewById(R.id.button2);
+        Button guest = findViewById(R.id.guest);
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        guest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create an Intent to open the target activity

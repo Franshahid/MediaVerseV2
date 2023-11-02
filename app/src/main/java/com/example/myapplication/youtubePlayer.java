@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v4.app.INotificationSideChannel;
 import android.util.Log;
 import android.view.View;
 
@@ -40,16 +41,20 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
     private YouTubePlayer youTubePlayer;
     private YouTubePlayerListener listener;
     private String videoId, Title, Artist;
+    public static boolean onPlayNow = false;
     private PlayerConstants.PlayerState currentState;
     private YouTubePlayerTracker youTubePlayerTracker;
     private SearchResult searchResult;
     boolean isPlaying;
+    static boolean Started = false;
     private BroadcastReceiver broadcastReceiver;
+    public static NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("debug", "creating");
         setContentView(R.layout.youtubeplayer);
+        Started = true;
         super.onCreate(savedInstanceState);
         youTubePlayerTracker = new YouTubePlayerTracker();
 
@@ -60,6 +65,7 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         youTubePlayerView.enableBackgroundPlayback(true);
         CreateNotification.createNotification(this, Title, Artist, R.drawable.ic_pause_black_24dp);
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         broadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -108,12 +114,20 @@ public class youtubePlayer extends AppCompatActivity implements Playable{
         youTubePlayerView.release();
 
     }
+    public static void Pause()
+    {
+        onPlayNow = false;
+        youtubePlayer.Pause();
+        //notificationManager.cancelAll();
+    }
     private void playVideo(String videoId) {
 
         youTubePlayerView.addYouTubePlayerListener(listener= new AbstractYouTubePlayerListener() {
 
             @Override
             public void onReady(@NonNull YouTubePlayer Player) {
+                MusicPlayerActivity.Pause();
+                onPlayNow = true;
                 DefaultPlayerUiController defaultPlayerUiController = new DefaultPlayerUiController(youTubePlayerView, Player);
                 youTubePlayerView.setCustomPlayerUi(defaultPlayerUiController.getRootView());
                 youTubePlayer = Player;
